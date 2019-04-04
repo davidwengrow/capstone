@@ -54,6 +54,7 @@ class Api::ReceiptsController < ApplicationController
     @receipt.total = params[:total] || @receipt.total
     @receipt.you_save = params[:you_save] || @receipt.you_save
     @receipt.image = params[:image] || @receipt.image
+    @receipt.user_id = params[:user_id] || @receipt.user_id
 
 
     if @product.save

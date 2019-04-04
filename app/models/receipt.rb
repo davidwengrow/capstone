@@ -9,11 +9,12 @@ class Receipt < ApplicationRecord
   def friendly_updated_at
     updated_at.strftime("%B %e, %Y")
   end
-  def tax
-    price * 0.09
-  end
-  def subtotal
-    total - tax
-  end
+  # def tax
+  #   subtotal * 0.09
+  # end
+  
+  # def total
+  #   subtotal + tax
+  # end
   
 end

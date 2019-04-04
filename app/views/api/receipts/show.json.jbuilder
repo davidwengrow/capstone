@@ -1,0 +1,1 @@
+json.partial! "receipt.json.jbuilder", receipt: @receipt
