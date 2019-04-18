@@ -16,6 +16,11 @@ Rails.application.routes.draw do
 
 
   namespace :api do
+
+    post "/users" => "users#create"
+
+    post "/sessions" => "sessions#create"
+
     get "/receipts" => "receipts#index"
     post "/receipts" => "receipts#create"
     get "receipts/:id" => "receipts#show"
@@ -24,12 +29,10 @@ Rails.application.routes.draw do
 
 
      
-    post "/sessions" => "sessions#create"
+   
 
-    get "/users" => "users#index"
-    post "/users" => "users#create"
-    get "users/:id" => "users#show"
-    patch "/users/:id" => "users#update"
-    delete "/users/:id" => "users#destroy"
+    
+    
+   
   end
 end
