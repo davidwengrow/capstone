@@ -6,13 +6,13 @@ Rails.application.routes.draw do
   # namespace :api do
   #   get "/photos" => "photos#index"
   # end
-  get "/receipts" => "receipts#index"
-  get "/receipts/new" => "receipts#new"
-  post "/receipts" => "receipts#create"
-  get "/receipts/:id" => "receipts#show"
-  get "/receipts/:id/edit" => "receipts#edit"
-  patch "/receipts/:id" => "receipts#update"
-  delete "/receipts/:id" => "receipts#destroy"
+  # get "/receipts" => "receipts#index"
+  # get "/receipts/new" => "receipts#new"
+  # post "/receipts" => "receipts#create"
+  # get "/receipts/:id" => "receipts#show"
+  # get "/receipts/:id/edit" => "receipts#edit"
+  # patch "/receipts/:id" => "receipts#update"
+  # delete "/receipts/:id" => "receipts#destroy"
 
 
   namespace :api do
@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     patch "/receipts/:id" => "receipts#update"
     delete "/receipts/:id" => "receipts#destroy"
 
+    post "/receipts_analyze" => "receipts#analyze"
 
      
    
