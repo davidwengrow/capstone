@@ -102,7 +102,8 @@ class Api::ReceiptsController < ApplicationController
     ocr_response = JSON.parse(ocr_response.body)
 # lines = response['ParsedResults'][0]['TextOverlay']['Lines']
 # # p lines
-    lines = ocr_response['ParsedResults'][0]['ParsedText']
+    lines = 
+      ocr_response && ocr_response['ParsedResults'] && ocr_response['ParsedResults'][0] ? ocr_response['ParsedResults'][0]['ParsedText'] : ""
 
 
 
@@ -176,7 +177,7 @@ class Api::ReceiptsController < ApplicationController
     date = lines.lines.select {|line| line.downcase.include?("/1")}[0] || lines.lines.select {|line| line.downcase.include?("april")}[0]
 
     subtotal_line = lines.lines.select {|line| line.downcase.include?("subtotal")}[0] || results_rtesseract.lines.select {|line| line.downcase.include?("subtotal")}[0]
-    subtotal = subtotal_line.downcase.partition('subtotal').last.strip
+    subtotal = subtotal_line ? subtotal_line.downcase.partition('subtotal').last.strip : ""
 
     tax_lines = 
       lines.lines.select {|line|
@@ -184,7 +185,8 @@ class Api::ReceiptsController < ApplicationController
       }[0] || 
       results_rtesseract.lines.select {|line| 
         line.downcase.include?("tax")
-      }[0]
+      }[0] ||
+      ""
     
     if tax_lines.include?("*")
       tax = tax_lines.downcase.partition('*').last.strip 
@@ -206,7 +208,9 @@ class Api::ReceiptsController < ApplicationController
 
 
     total_savings = results_rtesseract.lines.select {|line| line.downcase.include?("total savings")}[0] || lines.lines.select {|line| line.downcase.include?("total savings")}[0]
-    if total_savings.include?(":")
+    if !total_savings
+      you_save = ""
+    elsif total_savings.include?(":")
       you_save = total_savings.downcase.partition(':').last.strip
     else 
        
